@@ -17,8 +17,7 @@ export class BillingController {
 
   @EventPattern('order_created')
   async handleOrderCreated(@Payload() data: any, @Ctx() context: RmqContext) {
-    console.log('Pattern ', context.getPattern());
     this.billingService.bill(data);
-    // this.rmqService.ack(context);
+    this.rmqService.ack(context);
   }
 }
